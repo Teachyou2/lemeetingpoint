@@ -1,0 +1,8 @@
+# Configuration Render — site statique (Blueprint)
+# Render détecte ce fichier et déploie le dossier tel quel, sans build.
+services:
+  - type: web
+    name: le-meeting-point
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
