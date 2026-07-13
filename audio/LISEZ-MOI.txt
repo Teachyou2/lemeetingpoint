@@ -1,0 +1,8 @@
+Déposez ici les extraits audio, un fichier MP3 par musique,
+nommé exactement d'après son code (voir corpus.js) :
+
+    A1.mp3   A2.mp3   A3.mp3   ...   H6.mp3
+
+Environ 30 secondes par extrait suffisent.
+Tant qu'un fichier est absent, la carte affiche « extrait à ajouter »
+et le reste du site continue de fonctionner normalement.

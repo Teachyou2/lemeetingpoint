@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(py --version)",
+      "PowerShell(Start-Process powershell -ArgumentList '-NoProfile','-ExecutionPolicy','Bypass','-File','C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-User-richard-projet\\\\bc297907-08bd-4336-8394-21b11fff9836\\\\scratchpad\\\\serve.ps1' -WindowStyle Hidden; Start-Sleep -Seconds 2; try { \\(Invoke-WebRequest -Uri 'http://localhost:8777/index.html' -UseBasicParsing\\).StatusCode } catch { $_.Exception.Message })"
+    ]
+  }
+}

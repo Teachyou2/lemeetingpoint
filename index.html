@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le Meeting Point — Quand une image cherche sa musique</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+</head>
+<body>
+
+  <!-- ====== EN-TÊTE ====== -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <span class="brand-icon">🎬🎼</span>
+        <div>
+          <div class="brand-title">Le Meeting Point</div>
+          <div class="brand-sub">Quand une image cherche sa musique</div>
+        </div>
+      </div>
+      <button id="prof-toggle" class="prof-btn" title="Réservé au professeur">👩‍🏫 Mode prof</button>
+    </div>
+    <div class="progress-track"><div id="progress-bar" class="progress-fill"></div></div>
+  </header>
+
+  <!-- ====== NAVIGATION DES ÉTAPES ====== -->
+  <nav class="stepper wrap" id="stepper"></nav>
+
+  <main class="wrap">
+
+    <!-- ========== ÉTAPE 0 — ACCUEIL ========== -->
+    <section class="step" data-step="0">
+      <div class="hero">
+        <h1>Et si tu choisissais la musique d'un film&nbsp;?</h1>
+        <p class="lead">
+          Ici, tu vas d'abord <strong>créer une image</strong> qui raconte une émotion.
+          Puis tu vas écouter <strong>50 musiques mystères</strong> — sans titre, sans nom —
+          et t'arrêter sur <strong>celle qui va parfaitement avec ton image</strong>.
+          Aucune bonne ou mauvaise réponse&nbsp;: seule ton oreille décide.
+        </p>
+        <button class="cta" data-goto="1">Commencer l'aventure →</button>
+      </div>
+
+      <div class="cards-row">
+        <div class="mini-card"><span class="mini-num">1</span><b>Ressentir</b><p>Une même image change d'histoire selon la musique.</p></div>
+        <div class="mini-card"><span class="mini-num">2</span><b>Créer</b><p>Tu fabriques ton image de 30 à 60 secondes.</p></div>
+        <div class="mini-card"><span class="mini-num">3</span><b>Chercher</b><p>Tu explores les 50 musiques mystères.</p></div>
+        <div class="mini-card"><span class="mini-num">4</span><b>Choisir</b><p>Tu gardes 2 finalistes, puis tu tranches.</p></div>
+        <div class="mini-card"><span class="mini-num">5</span><b>Expliquer</b><p>Tu racontes pourquoi cette musique.</p></div>
+      </div>
+    </section>
+
+    <!-- ========== ÉTAPE 1 — RESSENTIR ========== -->
+    <section class="step" data-step="1" hidden>
+      <h2><span class="step-tag">Séance 1</span> Le choc des images</h2>
+      <p class="lead">Regarde bien cette expérience&nbsp;: <em>c'est la même image</em>, mais la musique change tout.</p>
+
+      <div class="experience">
+        <div class="exp-screen">🎞️ <span>Imagine un visage qui regarde par une fenêtre…</span></div>
+        <div class="exp-choices">
+          <button class="exp-btn" data-mood="triste">avec une musique <b>triste</b></button>
+          <button class="exp-btn" data-mood="joyeuse">avec une musique <b>joyeuse</b></button>
+          <button class="exp-btn" data-mood="inquiétante">avec une musique <b>inquiétante</b></button>
+        </div>
+        <p class="exp-result" id="exp-result">Clique sur un bouton ci-dessus…</p>
+      </div>
+
+      <div class="note">
+        <b>La grande question de tout le parcours :</b>
+        <span>La musique change-t-elle ce que l'image raconte&nbsp;?</span>
+      </div>
+
+      <div class="step-nav">
+        <button class="ghost" data-goto="0">← Retour</button>
+        <button class="cta" data-goto="2">J'ai compris, à moi de créer →</button>
+      </div>
+    </section>
+
+    <!-- ========== ÉTAPE 2 — CRÉER ========== -->
+    <section class="step" data-step="2" hidden>
+      <h2><span class="step-tag">Séance 2</span> Fabrique ton image</h2>
+      <p class="lead">Crée une image en mouvement de <strong>30 à 60 secondes</strong> qui exprime <strong>une émotion</strong> — mais <u>sans musique</u> pour l'instant.</p>
+
+      <div class="brief">
+        <div class="brief-item"><span>🎯</span><div><b>Choisis ton émotion AVANT de filmer.</b> Triste ? En colère ? Calme ? Peur ? Joie ? Tendresse ?</div></div>
+        <div class="brief-item"><span>📸</span><div><b>Utilise ce que tu veux :</b> tes photos, tes dessins, tes vidéos, ou des extraits de films (30&nbsp;s maximum par extrait).</div></div>
+        <div class="brief-item"><span>🤫</span><div><b>Ne dis jamais l'émotion à voix haute.</b> On doit la <i>ressentir</i>, pas la lire.</div></div>
+        <div class="brief-item"><span>📱</span><div><b>Outils possibles :</b> l'appli de montage de ton téléphone, un diaporama, CapCut…</div></div>
+      </div>
+
+      <label class="field">
+        <span>Quelle émotion veux-tu faire passer&nbsp;? (garde-la en tête)</span>
+        <input type="text" id="intention" placeholder="Ex. : une tristesse douce, comme un souvenir…" />
+      </label>
+
+      <div class="step-nav">
+        <button class="ghost" data-goto="1">← Retour</button>
+        <button class="cta" data-goto="3">Mon image est prête, à la chasse ! →</button>
+      </div>
+    </section>
+
+    <!-- ========== ÉTAPE 3 — CHERCHER (LE CORPUS) ========== -->
+    <section class="step" data-step="3" hidden>
+      <h2><span class="step-tag">Séance 3</span> La chasse à la musique</h2>
+      <p class="lead">
+        Voici les <strong>50 musiques mystères</strong>. Écoute, imagine-les sur ton image.
+        Mets un <b>♡</b> à celles qui te touchent, garde <b>2 finalistes</b> ⭐, puis choisis <b>ta musique</b> 🏆.
+      </p>
+
+      <div class="corpus-toolbar">
+        <div class="legend" id="famille-legend" hidden></div>
+        <div class="counters">
+          <span>♡ Coups de cœur : <b id="count-fav">0</b></span>
+          <span>⭐ Finalistes : <b id="count-final">0</b>/2</span>
+          <span>🏆 Choix : <b id="count-choice">—</b></span>
+        </div>
+      </div>
+
+      <div id="corpus-grid" class="corpus-grid"></div>
+
+      <div class="step-nav">
+        <button class="ghost" data-goto="2">← Retour</button>
+        <button class="cta" data-goto="4">J'ai choisi ma musique →</button>
+      </div>
+    </section>
+
+    <!-- ========== ÉTAPE 4 — EXPLIQUER (FICHE + DIALOGUE) ========== -->
+    <section class="step" data-step="4" hidden>
+      <h2><span class="step-tag">Séances 4 &amp; 5</span> Pourquoi cette musique&nbsp;?</h2>
+      <p class="lead">Remplis ta fiche. Tu la présenteras à la classe et tu en discuteras avec ton professeur.</p>
+
+      <div class="fiche">
+        <p class="fiche-line">J'ai choisi la musique
+          <b id="fiche-choice" class="fiche-code">—</b>
+          <button class="reveal-inline" id="reveal-choice" hidden>Révéler son nom</button>
+          <span id="fiche-choice-name" class="fiche-name"></span>
+        </p>
+
+        <label class="field"><span>Elle rend mon image plus…</span>
+          <input type="text" id="q-plus" placeholder="… triste ? … violente ? … douce ?" /></label>
+
+        <label class="field"><span>Ce qui produit cet effet dans la musique (coche ou écris) :</span>
+          <div class="chips" id="param-chips">
+            <button type="button" class="chip" data-p="le tempo (rapide/lent)">le tempo</button>
+            <button type="button" class="chip" data-p="l'intensité (fort/doux)">fort / doux</button>
+            <button type="button" class="chip" data-p="les instruments graves">les graves</button>
+            <button type="button" class="chip" data-p="les instruments aigus">les aigus</button>
+            <button type="button" class="chip" data-p="une mélodie triste (mineur)">mélodie triste</button>
+            <button type="button" class="chip" data-p="le rythme tendu">rythme tendu</button>
+          </div>
+        </label>
+
+        <label class="field"><span>J'ai hésité avec la musique…</span>
+          <input type="text" id="q-hesite" placeholder="Ex. : la B4" /></label>
+
+        <label class="field"><span>… mais je l'ai écartée parce que…</span>
+          <textarea id="q-pourquoi" rows="3" placeholder="Explique avec tes mots."></textarea></label>
+
+        <label class="field"><span>Ce que cette musique <u>ajoute</u> que l'image seule ne disait pas :</span>
+          <textarea id="q-ajoute" rows="3" placeholder="Écris ce que tu ressens."></textarea></label>
+      </div>
+
+      <details class="dialogue">
+        <summary>💬 Les questions dont on parlera ensemble</summary>
+        <ol>
+          <li>Qu'est-ce qui change dans ton image quand la musique arrive&nbsp;?</li>
+          <li>À quel moment précis ressens-tu l'effet le plus fort&nbsp;?</li>
+          <li>Ta musique rend l'image plus triste, plus violente, plus douce que prévu&nbsp;?</li>
+          <li>Qu'est-ce que la musique ajoute que l'image seule ne disait pas&nbsp;?</li>
+          <li>Ton finaliste écarté : pourquoi ne collait-il pas&nbsp;?</li>
+          <li>Et si on mettait une musique <i>contraire</i> : ton image mentirait-elle&nbsp;?</li>
+        </ol>
+      </details>
+
+      <div class="step-nav">
+        <button class="ghost" data-goto="3">← Retour au corpus</button>
+        <button class="cta" onclick="window.print()">🖨️ Imprimer / enregistrer ma fiche</button>
+      </div>
+      <p class="saved-note">✔ Tout est sauvegardé automatiquement dans ce navigateur.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer wrap">
+    <span>Le Meeting Point · séquence d'éducation musicale · cycle 4</span>
+    <button class="link-btn" id="reset-btn">Tout recommencer</button>
+  </footer>
+
+  <!-- Lecteur audio unique réutilisé par toutes les cartes -->
+  <audio id="player"></audio>
+
+  <script src="corpus.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
