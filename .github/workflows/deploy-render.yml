@@ -1,0 +1,21 @@
+name: Déploiement automatique sur Render
+
+# À chaque push sur main, on déclenche le déploiement Render
+# via son "Deploy Hook" (stocké dans le secret RENDER_DEPLOY_HOOK).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {} # permet aussi un déclenchement manuel depuis l'onglet Actions
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Déclencher le déploiement Render
+        run: |
+          if [ -z "${{ secrets.RENDER_DEPLOY_HOOK }}" ]; then
+            echo "❌ Secret RENDER_DEPLOY_HOOK manquant. Ajoute-le dans Settings → Secrets → Actions."
+            exit 1
+          fi
+          curl -fsSL -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+          echo "✅ Déploiement Render déclenché."
