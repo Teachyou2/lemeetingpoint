@@ -104,11 +104,27 @@ h2 { font-size: 1.5rem; letter-spacing: -0.01em; margin: 0 0 10px; display: flex
 
 /* ---------- Expérience séance 1 ---------- */
 .experience { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-top: 18px; box-shadow: var(--shadow); }
-.exp-screen { background: #12141a; color: #e8e6df; border-radius: 12px; padding: 34px 20px; text-align: center; font-size: 1.05rem; display: flex; flex-direction: column; gap: 8px; }
-.exp-screen span { font-size: 0.92rem; opacity: 0.8; }
+/* Scène illustrée (SVG) */
+.exp-scene { border-radius: 12px; overflow: hidden; position: relative; background: #12141a; }
+.exp-svg { width: 100%; height: auto; display: block; max-height: 340px; }
+.exp-svg .wall { fill: #1b1e26; }
+.exp-svg .frame { stroke: #343945; }
+.exp-svg .figure { fill: #07080c; }
+.exp-svg .sky { fill: #2b3550; transition: fill 0.6s ease; }
+.exp-svg .wx { opacity: 0; transition: opacity 0.5s ease; }
+#exp-scene.mood-triste .sky { fill: #5b7699; }
+#exp-scene.mood-triste .wx-rain { opacity: 0.95; animation: rain 0.7s linear infinite; }
+#exp-scene.mood-joyeuse .sky { fill: #8fc7e8; }
+#exp-scene.mood-joyeuse .wx-sun { opacity: 1; }
+#exp-scene.mood-inquietante .sky { fill: #3a2740; }
+#exp-scene.mood-inquietante .wx-storm { opacity: 1; }
+@keyframes rain { from { transform: translateY(-6px); } to { transform: translateY(6px); } }
+.exp-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 14px; color: #fff; font-size: 0.95rem; background: linear-gradient(transparent, rgba(0,0,0,0.6)); }
+
 .exp-choices { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
-.exp-btn { flex: 1 1 160px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; padding: 14px; border-radius: 12px; font-size: 0.95rem; transition: 0.15s; }
+.exp-btn { flex: 1 1 160px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; padding: 14px; border-radius: 12px; font-size: 0.95rem; transition: 0.15s; }
 .exp-btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+.exp-btn.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--bg)); }
 .exp-result { margin: 16px 0 0; font-size: 1.05rem; min-height: 1.6em; font-style: italic; color: var(--accent-deep); }
 
 .note { display: flex; flex-direction: column; gap: 4px; background: color-mix(in srgb, var(--gold) 14%, var(--surface)); border: 1px solid color-mix(in srgb, var(--gold) 40%, var(--line)); border-radius: 14px; padding: 18px 20px; margin-top: 20px; }
@@ -185,6 +201,55 @@ h2 { font-size: 1.5rem; letter-spacing: -0.01em; margin: 0 0 10px; display: flex
 .site-footer { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 0.85rem; flex-wrap: wrap; gap: 10px; }
 .link-btn { background: none; border: none; color: var(--ink-soft); text-decoration: underline; cursor: pointer; font: inherit; }
 .link-btn:hover { color: var(--accent); }
+
+/* ---------- Création de l'élève (phase 2) ---------- */
+.creation-loader { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; margin: 18px 0; box-shadow: var(--shadow); }
+.cl-title { margin: 0 0 12px; font-size: 1.1rem; }
+.cl-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+.cl-tab { flex: 1; border: 1px solid var(--line); background: var(--bg); color: var(--ink-soft); cursor: pointer; padding: 10px; border-radius: 10px; font-weight: 600; font-size: 0.9rem; transition: 0.15s; }
+.cl-tab:hover { border-color: var(--accent); }
+.cl-tab.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.cl-pane input[type="file"] { width: 100%; padding: 12px; border: 1px dashed var(--line); border-radius: 10px; background: var(--bg); cursor: pointer; color: var(--ink); }
+.cl-yt-row { display: flex; gap: 8px; }
+.cl-yt-row input { flex: 1; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font: inherit; background: var(--bg); color: var(--ink); }
+.cl-hint { font-size: 0.85rem; color: var(--ink-soft); margin: 8px 2px 0; }
+.mini-btn { border: none; background: var(--accent); color: #fff; cursor: pointer; border-radius: 10px; padding: 0 18px; font-weight: 700; }
+.mini-btn:hover { background: var(--accent-deep); }
+
+.creation-preview { margin-top: 14px; }
+.creation-preview:empty { margin-top: 0; }
+.cr-media { width: 100%; max-height: 340px; border-radius: 12px; display: block; background: #000; }
+.cr-frame { position: relative; padding-top: 56.25%; border-radius: 12px; overflow: hidden; background: #000; }
+.cr-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.cr-note { font-size: 0.85rem; color: var(--ink-soft); margin: 8px 2px 0; }
+
+/* ---------- Scène de la création (phase 3) ---------- */
+.creation-stage:not(:empty) { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; margin-bottom: 16px; box-shadow: var(--shadow); }
+.creation-stage .cr-media, .creation-stage .cr-frame { max-height: 260px; }
+.creation-stage .cr-frame { max-width: 460px; margin-inline: auto; padding-top: min(56.25%, 260px); }
+.stage-empty { text-align: center; color: var(--ink-soft); padding: 8px; font-size: 0.92rem; }
+.linklike { background: none; border: none; color: var(--accent); text-decoration: underline; cursor: pointer; font: inherit; }
+
+/* ---------- Panneau prof : import audio ---------- */
+.prof-audio { background: color-mix(in srgb, var(--gold) 8%, var(--surface)); border: 1px solid color-mix(in srgb, var(--gold) 35%, var(--line)); border-radius: var(--radius); padding: 22px; margin: 22px 0; }
+.prof-audio h3 { margin: 0 0 8px; }
+.pa-intro { font-size: 0.9rem; color: var(--ink-soft); margin: 0 0 14px; }
+.pa-intro code { background: var(--bg); padding: 1px 6px; border-radius: 5px; }
+.prof-audio input[type="file"] { width: 100%; padding: 12px; border: 1px dashed color-mix(in srgb, var(--gold) 45%, var(--line)); border-radius: 10px; background: var(--surface); cursor: pointer; color: var(--ink); }
+.prof-audio-list { margin: 12px 0; display: grid; gap: 6px; }
+.pa-row { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 9px; padding: 7px 10px; font-size: 0.88rem; }
+.pa-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pa-select { border: 1px solid var(--line); border-radius: 7px; padding: 5px 8px; background: var(--bg); color: var(--ink); font: inherit; }
+.pa-ok { font-size: 0.8rem; color: var(--ink-soft); min-width: 56px; text-align: right; }
+.prof-audio-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+.prof-audio-actions .cta, .prof-audio-actions .ghost { margin-top: 0; }
+.prof-audio-status { margin-top: 16px; }
+.pa-count { font-size: 0.9rem; margin: 0 0 10px; }
+.pa-grid { display: flex; flex-wrap: wrap; gap: 5px; }
+.pa-chip { font-size: 0.72rem; font-weight: 700; padding: 3px 7px; border-radius: 6px; border: 1px solid var(--line); }
+.pa-chip.has-idb { background: var(--accent); color: #fff; border-color: var(--accent); }
+.pa-chip.has-site { background: var(--gold); color: #fff; border-color: var(--gold); }
+.pa-chip.has-none { color: var(--ink-soft); opacity: 0.55; }
 
 /* ---------- Impression : seule la fiche ---------- */
 @media print {

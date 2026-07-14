@@ -57,13 +57,52 @@
       <p class="lead">Regarde bien cette expérience&nbsp;: <em>c'est la même image</em>, mais la musique change tout.</p>
 
       <div class="experience">
-        <div class="exp-screen">🎞️ <span>Imagine un visage qui regarde par une fenêtre…</span></div>
-        <div class="exp-choices">
-          <button class="exp-btn" data-mood="triste">avec une musique <b>triste</b></button>
-          <button class="exp-btn" data-mood="joyeuse">avec une musique <b>joyeuse</b></button>
-          <button class="exp-btn" data-mood="inquiétante">avec une musique <b>inquiétante</b></button>
+        <div class="exp-scene" id="exp-scene">
+          <svg class="exp-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Une silhouette regarde par une fenêtre">
+            <defs>
+              <clipPath id="winClip"><rect x="80" y="30" width="240" height="150" rx="4"/></clipPath>
+            </defs>
+            <rect x="0" y="0" width="400" height="240" class="wall"/>
+            <g clip-path="url(#winClip)">
+              <rect x="80" y="30" width="240" height="150" class="sky"/>
+              <g class="wx wx-sun">
+                <circle cx="150" cy="78" r="24" fill="#ffe08a"/>
+                <g stroke="#ffe08a" stroke-width="4" stroke-linecap="round">
+                  <line x1="150" y1="34" x2="150" y2="46"/><line x1="150" y1="110" x2="150" y2="122"/>
+                  <line x1="106" y1="78" x2="118" y2="78"/><line x1="182" y1="78" x2="194" y2="78"/>
+                  <line x1="119" y1="47" x2="127" y2="55"/><line x1="173" y1="101" x2="181" y2="109"/>
+                  <line x1="181" y1="47" x2="173" y2="55"/><line x1="127" y1="101" x2="119" y2="109"/>
+                </g>
+              </g>
+              <g class="wx wx-rain" stroke="#d6e6f5" stroke-width="3" stroke-linecap="round">
+                <line x1="110" y1="40" x2="103" y2="60"/><line x1="140" y1="55" x2="133" y2="75"/>
+                <line x1="170" y1="42" x2="163" y2="62"/><line x1="200" y1="58" x2="193" y2="78"/>
+                <line x1="230" y1="44" x2="223" y2="64"/><line x1="260" y1="56" x2="253" y2="76"/>
+                <line x1="290" y1="42" x2="283" y2="62"/><line x1="125" y1="90" x2="118" y2="110"/>
+                <line x1="215" y1="92" x2="208" y2="112"/><line x1="275" y1="90" x2="268" y2="110"/>
+              </g>
+              <g class="wx wx-storm">
+                <ellipse cx="205" cy="66" rx="66" ry="24" fill="#2f2a44"/>
+                <ellipse cx="150" cy="74" rx="40" ry="18" fill="#3a3552"/>
+                <path d="M198 84 l-16 30 h13 l-9 30 34 -40 h-15 l11 -20 z" fill="#ffd23f"/>
+              </g>
+            </g>
+            <rect x="80" y="30" width="240" height="150" rx="4" fill="none" class="frame" stroke-width="8"/>
+            <line x1="200" y1="30" x2="200" y2="180" class="frame" stroke-width="6"/>
+            <line x1="80" y1="105" x2="320" y2="105" class="frame" stroke-width="6"/>
+            <g class="figure">
+              <circle cx="200" cy="150" r="26"/>
+              <path d="M152 240 q48 -66 96 0 z"/>
+            </g>
+          </svg>
+          <div class="exp-caption" id="exp-caption">La même image… <b>sans musique.</b></div>
         </div>
-        <p class="exp-result" id="exp-result">Clique sur un bouton ci-dessus…</p>
+        <div class="exp-choices">
+          <button class="exp-btn" data-mood="triste"><span>😢</span> musique <b>triste</b></button>
+          <button class="exp-btn" data-mood="joyeuse"><span>😊</span> musique <b>joyeuse</b></button>
+          <button class="exp-btn" data-mood="inquiétante"><span>😨</span> musique <b>inquiétante</b></button>
+        </div>
+        <p class="exp-result" id="exp-result">Clique sur un bouton : regarde — et écoute — la même image changer d'histoire.</p>
       </div>
 
       <div class="note">
@@ -89,6 +128,26 @@
         <div class="brief-item"><span>📱</span><div><b>Outils possibles :</b> l'appli de montage de ton téléphone, un diaporama, CapCut…</div></div>
       </div>
 
+      <div class="creation-loader">
+        <h3 class="cl-title">🎬 Dépose ta création ici</h3>
+        <div class="cl-tabs">
+          <button type="button" class="cl-tab on" data-cl="file">📁 Ma vidéo / image</button>
+          <button type="button" class="cl-tab" data-cl="youtube">▶️ Lien YouTube</button>
+        </div>
+        <div class="cl-pane" data-pane="file">
+          <input type="file" id="creation-file" accept="video/*,image/*" />
+          <p class="cl-hint">Choisis la vidéo (ou l'image) que tu as fabriquée. Elle reste sur ton appareil.</p>
+        </div>
+        <div class="cl-pane" data-pane="youtube" hidden>
+          <div class="cl-yt-row">
+            <input type="url" id="creation-yt" placeholder="Colle un lien YouTube — ex. https://youtu.be/xxxxxxxxxxx" />
+            <button type="button" id="creation-yt-btn" class="mini-btn">Charger</button>
+          </div>
+          <p class="cl-hint">Utile si ta création est déjà en ligne (extrait de film, montage…).</p>
+        </div>
+        <div id="creation-preview" class="creation-preview"></div>
+      </div>
+
       <label class="field">
         <span>Quelle émotion veux-tu faire passer&nbsp;? (garde-la en tête)</span>
         <input type="text" id="intention" placeholder="Ex. : une tristesse douce, comme un souvenir…" />
@@ -108,6 +167,8 @@
         Mets un <b>♡</b> à celles qui te touchent, garde <b>2 finalistes</b> ⭐, puis choisis <b>ta musique</b> 🏆.
       </p>
 
+      <div id="creation-stage" class="creation-stage"></div>
+
       <div class="corpus-toolbar">
         <div class="legend" id="famille-legend" hidden></div>
         <div class="counters">
@@ -118,6 +179,23 @@
       </div>
 
       <div id="corpus-grid" class="corpus-grid"></div>
+
+      <section id="prof-audio" class="prof-audio" hidden>
+        <h3>🎛️ Mode prof — importer les musiques</h3>
+        <p class="pa-intro">
+          Glisse tes fichiers audio ci-dessous. Nomme-les de préférence par code
+          (ex. <b>A1 – Barber.mp3</b>) pour un classement automatique — sinon, corrige le code à la main.
+          Les musiques jouent <b>aussitôt sur cet ordinateur</b>. Pour que <b>tous les élèves</b> les entendent,
+          télécharge le paquet et pousse-le dans le dépôt (dossier <code>audio/</code>).
+        </p>
+        <input type="file" id="prof-audio-files" accept="audio/*" multiple />
+        <div id="prof-audio-list" class="prof-audio-list"></div>
+        <div class="prof-audio-actions">
+          <button type="button" id="prof-audio-zip" class="cta">⬇️ Télécharger audio.zip (pour le site)</button>
+          <button type="button" id="prof-audio-clear" class="ghost">Vider les musiques de cet ordinateur</button>
+        </div>
+        <div id="prof-audio-status" class="prof-audio-status"></div>
+      </section>
 
       <div class="step-nav">
         <button class="ghost" data-goto="2">← Retour</button>
@@ -191,6 +269,7 @@
   <audio id="player"></audio>
 
   <script src="corpus.js"></script>
+  <script src="zip.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

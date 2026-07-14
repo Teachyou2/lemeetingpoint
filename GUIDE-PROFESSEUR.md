@@ -62,6 +62,21 @@ Tout ce que l'élève saisit est **sauvegardé automatiquement dans son navigate
 
 ---
 
+## 3 bis. Nouveautés : création de l'élève + import des musiques
+
+**Côté élève (étapes 2 et 3) :** l'élève peut maintenant **charger sa création** —
+une vidéo/image depuis son appareil, ou un **lien YouTube**. Elle s'affiche en étape 2,
+puis réapparaît **au-dessus du corpus en étape 3** (vidéo en sourdine) pour qu'il **écoute
+les musiques par-dessus** et trouve celle qui colle.
+
+**Côté prof (étape 3, en Mode prof) :** un panneau **« importer les musiques »** permet de
+glisser vos fichiers audio. Nommez-les de préférence par code (ex. `A1 - Barber.mp3`) : ils
+se classent tout seuls. Deux usages :
+- ▶️ Les musiques jouent **aussitôt sur cet ordinateur** (idéal poste de classe unique).
+- ⬇️ Le bouton **« Télécharger audio.zip »** vous donne un dossier `audio/` correctement
+  renommé, **prêt à pousser dans le dépôt** pour que **tous les élèves** l'entendent.
+  Une grille indique, code par code, qui a déjà un son.
+
 ## 4. Mode professeur
 
 Bouton **« 👩‍🏫 Mode prof »** en haut à droite.
