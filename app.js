@@ -63,39 +63,13 @@ function render() {
 /* ============================================================
    ÉTAPE 1 — Expérience
    ============================================================ */
-const EMO = {
-  triste:      { label: "Triste",      emoji: "😢", sky: "#5b7699", grade: "#12305e", op: 0.34, wx: "rain"  },
-  joyeuse:     { label: "Joyeuse",     emoji: "😊", sky: "#8fc7e8", grade: "#ffd86b", op: 0.20, wx: "sun"   },
-  inquietante: { label: "Inquiétante", emoji: "😨", sky: "#3a2740", grade: "#140309", op: 0.42, wx: "storm" },
-  tendre:      { label: "Tendre",      emoji: "🕊️", sky: "#f0c0d2", grade: "#e58fb0", op: 0.26, wx: "none"  },
-  epique:      { label: "Épique",      emoji: "⚔️", sky: "#c56a2a", grade: "#7a2a10", op: 0.30, wx: "sun"   },
-  agitee:      { label: "Agitée",      emoji: "⚡", sky: "#e0a030", grade: "#c23a1a", op: 0.26, wx: "storm" },
-};
-const GAME_ROUNDS = [
-  { code: "A2", answer: "triste" },       // Albinoni — Adagio
-  { code: "C4", answer: "joyeuse" },      // Offenbach — Cancan
-  { code: "B7", answer: "inquietante" },  // Grieg — Antre du roi de la montagne
-  { code: "H4", answer: "tendre" },       // Massenet — Méditation de Thaïs
-  { code: "F2", answer: "epique" },       // Wagner — Chevauchée des Walkyries
-  { code: "G2", answer: "agitee" },       // Rimski-Korsakov — Vol du bourdon
+const IMG_CHOICES = [
+  { code: "B1", label: "Musique 1" }, // Beethoven — Symphonie n°5
+  { code: "C4", label: "Musique 2" }, // Offenbach — Cancan
+  { code: "F2", label: "Musique 3" }, // Wagner — Chevauchée des Walkyries
 ];
-let gIdx = -1, gScore = 0;
+let imgChoice = null;
 
-function applyMood(key) {
-  const v = EMO[key]; if (!v) return;
-  const scene = $("#exp-scene");
-  const sky = scene.querySelector(".sky"); if (sky) sky.style.fill = v.sky;
-  const grade = scene.querySelector(".grade"); if (grade) { grade.style.fill = v.grade; grade.style.opacity = v.op; }
-  scene.querySelectorAll(".wx").forEach((w) =>
-    (w.style.opacity = w.classList.contains("wx-" + v.wx) ? "1" : "0")
-  );
-}
-function clearMood() {
-  const scene = $("#exp-scene");
-  const grade = scene.querySelector(".grade"); if (grade) grade.style.opacity = 0;
-  const sky = scene.querySelector(".sky"); if (sky) sky.style.fill = "";
-  scene.querySelectorAll(".wx").forEach((w) => (w.style.opacity = "0"));
-}
 async function playCode(code) {
   stopPlay();
   const e = CORPUS.find((x) => x.code === code); if (!e) return;
@@ -103,81 +77,31 @@ async function playCode(code) {
   try { const b = await IDB.get(code); if (b) src = URL.createObjectURL(b); } catch (_) {}
   player.src = src; player.currentTime = 0; player.play().catch(() => {});
 }
-function emoButtons() {
-  return Object.entries(EMO).map(([k, v]) =>
-    `<button class="emo-btn" data-emo="${k}"><span>${v.emoji}</span>${v.label}</button>`
-  ).join("");
-}
 function renderGame() {
   const panel = $("#game-panel"); if (!panel) return;
 
-  if (gIdx === -1) { // intro
-    clearMood();
-    $("#exp-caption").innerHTML = "🎧 Prêt à écouter&nbsp;?";
-    panel.innerHTML =
-      `<div class="g-intro">
-        <p>🎧 <b>Monte le son.</b> Tu vas entendre <b>6 musiques mystères</b>. À chaque fois, une seule question&nbsp;:
-        <b>quelle émotion te traverse&nbsp;?</b></p>
-        <p class="g-hint">Aucune mauvaise réponse — ton oreille a toujours raison.</p>
-        <button class="cta g-start">Commencer le jeu →</button>
-      </div>`;
-    panel.querySelector(".g-start").addEventListener("click", () => { gIdx = 0; gScore = 0; renderGame(); });
-    return;
-  }
+  $("#exp-caption").innerHTML = imgChoice === null
+    ? "🎧 Écoute les 3 musiques, puis choisis."
+    : `Toi, tu trouves que la <b>${IMG_CHOICES[imgChoice].label.toLowerCase()}</b> va le mieux avec cette image.`;
 
-  if (gIdx >= GAME_ROUNDS.length) { // fin
-    stopPlay();
-    clearMood();
-    $("#exp-caption").innerHTML = "🎬 La même image, <b>6 histoires.</b>";
-    panel.innerHTML =
-      `<div class="g-end">
-        <p class="g-score">🎯 Tu as retrouvé l'émotion la plus courante <b>${gScore}/${GAME_ROUNDS.length}</b> fois.</p>
-        <p>Mais surtout&nbsp;: <b>la même image vient de te raconter 6 histoires différentes</b>, rien qu'avec le son.
-        C'est exactement ce pouvoir que tu vas utiliser.</p>
-        <div class="g-endbtns">
-          <button class="ghost g-again">↺ Rejouer</button>
-          <button class="cta" data-goto="2">À moi de créer →</button>
-        </div>
-      </div>`;
-    panel.querySelector(".g-again").addEventListener("click", () => { gIdx = -1; renderGame(); });
-    wireGoto(panel);
-    return;
-  }
-
-  const r = GAME_ROUNDS[gIdx]; // manche
-  $("#exp-caption").innerHTML = "🎧 Écoute…";
   panel.innerHTML =
-    `<div class="g-round">
-      <div class="g-top"><span>Musique <b>${gIdx + 1}</b> / ${GAME_ROUNDS.length}</span>
-        <button class="g-play">▶ Réécouter</button></div>
-      <p class="g-ask">Quelle émotion ressens-tu&nbsp;?</p>
-      <div class="g-choices">${emoButtons()}</div>
+    `<div class="g-intro">
+      <p>🎧 <b>Monte le son.</b> Écoute ces <b>3 musiques classiques</b> (domaine public) et choisis celle qui va le mieux avec l'image, selon toi.</p>
+      <p class="g-hint">Aucune bonne réponse — ton oreille décide.</p>
+      <div class="g-choices">
+        ${IMG_CHOICES.map((r, i) => `
+          <div class="img-choice${imgChoice === i ? " chosen" : ""}">
+            <button type="button" class="mini-btn img-play" data-i="${i}">▶ ${r.label}</button>
+            <button type="button" class="cta img-pick" data-i="${i}">${imgChoice === i ? "✓ Choisie" : "Choisir celle-ci"}</button>
+          </div>`).join("")}
+      </div>
     </div>`;
-  playCode(r.code);
-  panel.querySelector(".g-play").addEventListener("click", () => playCode(r.code));
-  panel.querySelectorAll(".emo-btn").forEach((b) =>
-    b.addEventListener("click", () => answerRound(b.dataset.emo))
+  panel.querySelectorAll(".img-play").forEach((b) =>
+    b.addEventListener("click", () => playCode(IMG_CHOICES[+b.dataset.i].code))
   );
-}
-function answerRound(guess) {
-  const r = GAME_ROUNDS[gIdx];
-  const match = guess === r.answer;
-  if (match) gScore++;
-  applyMood(guess); // le choix de l'élève repeint l'image
-  const guessL = EMO[guess].label.toLowerCase();
-  const ansL = EMO[r.answer].label.toLowerCase();
-  $("#exp-caption").innerHTML = `Toi, tu la ressens <b>${guessL}.</b>`;
-  const last = gIdx === GAME_ROUNDS.length - 1;
-  const msg = match
-    ? `🎯 <b>Bravo&nbsp;!</b> Cette musique, la plupart la trouvent aussi <b>${ansL}</b>.`
-    : `🎨 Tu l'as trouvée <b>${guessL}</b> — et c'est permis&nbsp;! La plupart la trouvent plutôt <b>${ansL}</b>.`;
-  const panel = $("#game-panel");
-  panel.innerHTML =
-    `<div class="g-feedback ${match ? "good" : "ok"}">
-      <p>${msg}</p>
-      <button class="cta g-next">${last ? "Voir le résultat →" : "Musique suivante →"}</button>
-    </div>`;
-  panel.querySelector(".g-next").addEventListener("click", () => { gIdx++; renderGame(); });
+  panel.querySelectorAll(".img-pick").forEach((b) =>
+    b.addEventListener("click", () => { imgChoice = +b.dataset.i; renderGame(); })
+  );
 }
 
 /* ============================================================

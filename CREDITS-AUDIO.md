@@ -29,3 +29,8 @@ partager sous la même licence).
 - Les **40 autres codes** du corpus n'ont pas encore de son : déposez vos propres `audio/<code>.mp3`.
   D'autres extraits libres se trouvent sur **musopen.org** (filtre « Public Domain ») et sur
   **Wikimedia Commons**.
+
+## Crédit image (étape 1)
+| Fichier | Œuvre | Licence | Source |
+|---|---|---|---|
+| `images/etape1-voyageur.jpg` | Caspar David Friedrich — *Le Voyageur contemplant une mer de nuages* (1818) | 🟢 Domaine public | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Caspar_David_Friedrich_-_Wanderer_above_the_Sea_of_Fog.jpeg) |

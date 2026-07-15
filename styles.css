@@ -104,40 +104,21 @@ h2 { font-size: 1.5rem; letter-spacing: -0.01em; margin: 0 0 10px; display: flex
 
 /* ---------- Expérience séance 1 ---------- */
 .experience { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-top: 18px; box-shadow: var(--shadow); }
-/* Scène illustrée (SVG) */
+/* Scène illustrée (image) */
 .exp-scene { border-radius: 12px; overflow: hidden; position: relative; background: #12141a; }
-.exp-svg { width: 100%; height: auto; display: block; max-height: 340px; }
-.exp-svg .wall { fill: #1b1e26; }
-.exp-svg .frame { stroke: #343945; }
-.exp-svg .figure { fill: #07080c; }
-.exp-svg .sky { fill: #2b3550; transition: fill 0.6s ease; }
-.exp-svg .wx { opacity: 0; transition: opacity 0.5s ease; }
-.exp-svg .grade { transition: opacity 0.6s ease, fill 0.6s ease; }
-.exp-svg .wx-rain { animation: rain 0.7s linear infinite; }
-@keyframes rain { from { transform: translateY(-6px); } to { transform: translateY(6px); } }
+.exp-photo { width: 100%; height: auto; display: block; max-height: 420px; object-fit: cover; }
 .exp-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 14px; color: #fff; font-size: 0.95rem; background: linear-gradient(transparent, rgba(0,0,0,0.65)); }
 
-/* Jeu « devine l'émotion » */
+/* Choix des 3 musiques */
 .game-panel { margin-top: 16px; }
-.g-intro, .g-end, .g-feedback, .g-round { animation: fade 0.3s ease; }
+.g-intro { animation: fade 0.3s ease; }
 .g-hint { color: var(--ink-soft); font-size: 0.9rem; }
-.g-top { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; color: var(--ink-soft); }
-.g-play { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 6px 14px; cursor: pointer; font-weight: 600; }
-.g-play:hover { border-color: var(--accent); color: var(--accent); }
-.g-ask { font-weight: 700; font-size: 1.08rem; margin: 12px 0 12px; }
-.g-choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-@media (max-width: 520px) { .g-choices { grid-template-columns: repeat(2, 1fr); } }
-.emo-btn { display: flex; flex-direction: column; align-items: center; gap: 5px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 12px; padding: 14px 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: 0.15s; }
-.emo-btn span { font-size: 1.7rem; }
-.emo-btn:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
-.g-feedback { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; box-shadow: var(--shadow); }
-.g-feedback.good { border-color: color-mix(in srgb, #2a9d8f 55%, var(--line)); }
-.g-feedback p { margin: 0 0 14px; font-size: 1.05rem; }
-.g-score { font-size: 1.15rem; }
-.g-endbtns { display: flex; gap: 10px; flex-wrap: wrap; }
-.g-endbtns .cta, .g-endbtns .ghost { margin-top: 0; }
-.g-next, .g-start { margin-top: 6px; }
-.exp-result { margin: 16px 0 0; font-size: 1.05rem; min-height: 1.6em; font-style: italic; color: var(--accent-deep); }
+.g-choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+@media (max-width: 520px) { .g-choices { grid-template-columns: 1fr; } }
+.img-choice { display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--line); background: var(--bg); border-radius: 12px; padding: 14px; align-items: stretch; }
+.img-choice.chosen { border-color: var(--accent); box-shadow: var(--shadow); }
+.img-choice .img-pick { margin-top: 0; }
+.img-choice.chosen .img-pick { background: var(--accent-deep); }
 
 .note { display: flex; flex-direction: column; gap: 4px; background: color-mix(in srgb, var(--gold) 14%, var(--surface)); border: 1px solid color-mix(in srgb, var(--gold) 40%, var(--line)); border-radius: 14px; padding: 18px 20px; margin-top: 20px; }
 .note b { color: var(--accent-deep); }

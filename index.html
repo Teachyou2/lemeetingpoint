@@ -53,55 +53,14 @@
 
     <!-- ========== ÉTAPE 1 — RESSENTIR ========== -->
     <section class="step" data-step="1" hidden>
-      <h2><span class="step-tag">Séance 1</span> Le choc des images</h2>
-      <p class="lead">Regarde bien cette expérience&nbsp;: <em>c'est la même image</em>, mais la musique change tout.</p>
+      <h2><span class="step-tag">Séance 1</span> Une image, trois musiques</h2>
+      <p class="lead">Regarde bien cette image, puis écoute <strong>3 musiques classiques</strong>&nbsp;: laquelle lui va le mieux, selon toi&nbsp;?</p>
 
       <div class="experience">
         <div class="exp-scene" id="exp-scene">
-          <svg class="exp-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Une silhouette regarde par une fenêtre">
-            <defs>
-              <clipPath id="winClip"><rect x="80" y="30" width="240" height="150" rx="4"/></clipPath>
-              <radialGradient id="vig" cx="50%" cy="45%" r="75%">
-                <stop offset="55%" stop-color="#000" stop-opacity="0"/>
-                <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
-              </radialGradient>
-            </defs>
-            <rect x="0" y="0" width="400" height="240" class="wall"/>
-            <g clip-path="url(#winClip)">
-              <rect x="80" y="30" width="240" height="150" class="sky"/>
-              <g class="wx wx-sun">
-                <circle cx="150" cy="78" r="24" fill="#ffe08a"/>
-                <g stroke="#ffe08a" stroke-width="4" stroke-linecap="round">
-                  <line x1="150" y1="34" x2="150" y2="46"/><line x1="150" y1="110" x2="150" y2="122"/>
-                  <line x1="106" y1="78" x2="118" y2="78"/><line x1="182" y1="78" x2="194" y2="78"/>
-                  <line x1="119" y1="47" x2="127" y2="55"/><line x1="173" y1="101" x2="181" y2="109"/>
-                  <line x1="181" y1="47" x2="173" y2="55"/><line x1="127" y1="101" x2="119" y2="109"/>
-                </g>
-              </g>
-              <g class="wx wx-rain" stroke="#d6e6f5" stroke-width="3" stroke-linecap="round">
-                <line x1="110" y1="40" x2="103" y2="60"/><line x1="140" y1="55" x2="133" y2="75"/>
-                <line x1="170" y1="42" x2="163" y2="62"/><line x1="200" y1="58" x2="193" y2="78"/>
-                <line x1="230" y1="44" x2="223" y2="64"/><line x1="260" y1="56" x2="253" y2="76"/>
-                <line x1="290" y1="42" x2="283" y2="62"/><line x1="125" y1="90" x2="118" y2="110"/>
-                <line x1="215" y1="92" x2="208" y2="112"/><line x1="275" y1="90" x2="268" y2="110"/>
-              </g>
-              <g class="wx wx-storm">
-                <ellipse cx="205" cy="66" rx="66" ry="24" fill="#2f2a44"/>
-                <ellipse cx="150" cy="74" rx="40" ry="18" fill="#3a3552"/>
-                <path d="M198 84 l-16 30 h13 l-9 30 34 -40 h-15 l11 -20 z" fill="#ffd23f"/>
-              </g>
-            </g>
-            <rect x="80" y="30" width="240" height="150" rx="4" fill="none" class="frame" stroke-width="8"/>
-            <line x1="200" y1="30" x2="200" y2="180" class="frame" stroke-width="6"/>
-            <line x1="80" y1="105" x2="320" y2="105" class="frame" stroke-width="6"/>
-            <g class="figure">
-              <circle cx="200" cy="150" r="26"/>
-              <path d="M152 240 q48 -66 96 0 z"/>
-            </g>
-            <rect class="grade" x="0" y="0" width="400" height="240" fill="#000" opacity="0"/>
-            <rect x="0" y="0" width="400" height="240" fill="url(#vig)" pointer-events="none"/>
-          </svg>
-          <div class="exp-caption" id="exp-caption">🎧 Prêt à écouter&nbsp;?</div>
+          <img class="exp-photo" src="images/etape1-voyageur.jpg"
+               alt="Le Voyageur contemplant une mer de nuages, peinture de Caspar David Friedrich (1818, domaine public)" />
+          <div class="exp-caption" id="exp-caption">🎧 Écoute les 3 musiques, puis choisis.</div>
         </div>
         <div class="game-panel" id="game-panel"></div>
       </div>
