@@ -46,6 +46,7 @@ function goto(n) {
   save();
   render();
   if (n === 2 || n === 3) refreshCreation();
+  if (n === 2) { refreshImageBankUI(); if (state.prof) renderProfImagesStatus(); }
   if (n === 3 && state.prof) renderProfStatus();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -296,9 +297,11 @@ function applyProf() {
   $("#prof-toggle").textContent = state.prof ? "👩‍🏫 Mode prof : ON" : "👩‍🏫 Mode prof";
   $("#famille-legend").hidden = !state.prof;
   $("#prof-audio").hidden = !state.prof;
+  $("#prof-images").hidden = !state.prof;
   refreshCorpusUI();
+  refreshImageBankUI();
   refreshFiche();
-  if (state.prof) renderProfStatus();
+  if (state.prof) { renderProfStatus(); renderProfImagesStatus(); }
 }
 
 /* ============================================================
@@ -410,6 +413,19 @@ async function renderCreationInto(container, stage) {
   const c = state.creation || {};
   if (!c.type) { container.innerHTML = creationEmptyHTML(stage); wireGoto(container); return; }
 
+  if (c.type === "bank") {
+    const e = IMAGE_CORPUS.find((x) => x.code === c.code);
+    let src = e ? e.src : null;
+    try { const b = await IDB.get(c.code); if (b) src = URL.createObjectURL(b); } catch (_) {}
+    if (!src) { container.innerHTML = creationEmptyHTML(stage); wireGoto(container); return; }
+    const isVideo = /\.(mp4|webm|mov)$/i.test(src);
+    container.innerHTML = isVideo
+      ? `<video class="cr-media" src="${src}" ${stage ? "muted loop" : ""} controls playsinline></video>` +
+        (stage ? `<p class="cr-note">🔇 Vidéo en sourdine — lance-la, puis écoute une musique par-dessus.</p>` : "")
+      : `<img class="cr-media" src="${src}" alt="image choisie dans la banque" />`;
+    return;
+  }
+
   if (c.type === "youtube") {
     container.innerHTML =
       `<div class="cr-frame"><iframe src="https://www.youtube-nocookie.com/embed/${c.ytid}${stage ? "?mute=1" : ""}"
@@ -436,6 +452,170 @@ function refreshCreation() {
   renderCreationInto($("#creation-preview"), false);
   renderCreationInto($("#creation-stage"), true);
 }
+
+/* ============================================================
+   BANQUE D'IMAGES (choix élève + import prof)
+   ============================================================ */
+function buildImageBank() {
+  const grid = $("#image-bank-grid");
+  if (!grid) return;
+  grid.innerHTML = "";
+  IMAGE_CORPUS.forEach((e) => {
+    const isVideo = /\.(mp4|webm|mov)$/i.test(e.src);
+    const card = document.createElement("div");
+    card.className = "bank-card";
+    card.dataset.code = e.code;
+    card.innerHTML = `
+      <div class="bank-thumb">
+        ${isVideo ? `<video src="${e.src}" muted></video>` : `<img src="${e.src}" alt="" loading="lazy" />`}
+        <div class="bank-code">${e.code}</div>
+        <div class="bank-reveal"></div>
+        <div class="bank-missing" hidden>image à ajouter</div>
+      </div>
+      <button type="button" class="mini-btn bank-pick">Choisir celle-ci</button>`;
+    const media = card.querySelector("img, video");
+    media.addEventListener("error", () => {
+      card.querySelector(".bank-missing").hidden = false;
+      media.style.display = "none";
+    });
+    card.querySelector(".bank-pick").addEventListener("click", () => pickFromBank(e.code));
+    grid.appendChild(card);
+  });
+  refreshImageBankUI();
+  refreshImageBankSrcs();
+}
+async function refreshImageBankSrcs() {
+  for (const e of IMAGE_CORPUS) {
+    let blob;
+    try { blob = await IDB.get(e.code); } catch (_) { continue; }
+    if (!blob) continue;
+    const card = document.querySelector(`.bank-card[data-code="${e.code}"]`);
+    if (!card) continue;
+    const media = card.querySelector("img, video");
+    media.src = URL.createObjectURL(blob);
+    media.style.display = "";
+    card.querySelector(".bank-missing").hidden = true;
+  }
+}
+function refreshImageBankUI() {
+  $$(".bank-card").forEach((card) => {
+    const code = card.dataset.code;
+    const rev = card.querySelector(".bank-reveal");
+    const e = IMAGE_CORPUS.find((x) => x.code === code);
+    rev.textContent = state.prof && e && e.titre ? e.titre + (e.auteur ? " — " + e.auteur : "") : "";
+    card.classList.toggle("chosen", state.creation && state.creation.type === "bank" && state.creation.code === code);
+  });
+}
+function pickFromBank(code) {
+  state.creation = { type: "bank", code, ytid: null, fileName: null };
+  save();
+  refreshCreation();
+  refreshImageBankUI();
+}
+
+let profImageFiles = []; // { file, code, name }
+
+function guessImageCode(name) {
+  const m = name.match(/(?:^|[^A-Za-z0-9])[Ii][\s._-]?0?([1-9][0-9]?)/);
+  if (m) {
+    const code = "I" + m[1];
+    if (IMAGE_CORPUS.some((e) => e.code === code)) return code;
+  }
+  return "";
+}
+function extFromImageType(t) {
+  return { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif",
+    "video/mp4": "mp4", "video/webm": "webm", "video/quicktime": "mov" }[t] || "jpg";
+}
+function imageCodeOptions(selected) {
+  return IMAGE_CORPUS.map((e) =>
+    `<option value="${e.code}" ${e.code === selected ? "selected" : ""}>${e.code}</option>`
+  ).join("");
+}
+
+$("#prof-images-files").addEventListener("change", async (ev) => {
+  for (const f of ev.target.files) {
+    const code = guessImageCode(f.name);
+    profImageFiles.push({ file: f, code, name: f.name });
+    if (code) await IDB.put(code, f);
+  }
+  ev.target.value = "";
+  renderProfImagesList();
+  renderProfImagesStatus();
+  buildImageBank();
+});
+
+function renderProfImagesList() {
+  const box = $("#prof-images-list");
+  if (!profImageFiles.length) { box.innerHTML = ""; return; }
+  box.innerHTML = profImageFiles.map((it, i) =>
+    `<div class="pa-row">
+      <span class="pa-name" title="${it.name}">${it.name}</span>
+      <select class="pi-select" data-i="${i}">
+        <option value="">— code —</option>${imageCodeOptions(it.code)}
+      </select>
+      <span class="pa-ok">${it.code ? "✓" : "à classer"}</span>
+    </div>`
+  ).join("");
+  box.querySelectorAll(".pi-select").forEach((sel) =>
+    sel.addEventListener("change", async () => {
+      const i = +sel.dataset.i;
+      const newCode = sel.value;
+      const old = profImageFiles[i].code;
+      if (old && old !== newCode) await IDB.del(old);
+      profImageFiles[i].code = newCode;
+      if (newCode) await IDB.put(newCode, profImageFiles[i].file);
+      renderProfImagesList();
+      renderProfImagesStatus();
+      buildImageBank();
+    })
+  );
+}
+
+async function renderProfImagesStatus() {
+  const box = $("#prof-images-status");
+  if (!box) return;
+  let keys = [];
+  try { keys = (await IDB.keys()).filter((k) => typeof k === "string" && k.startsWith("I")); } catch (_) {}
+  const curated = IMAGE_CORPUS.filter((e) => e.titre).length;
+  const total = IMAGE_CORPUS.length;
+  box.innerHTML =
+    `<p class="pa-count"><b>${new Set([...keys, ...IMAGE_CORPUS.filter((e) => e.titre).map((e) => e.code)]).size}/${total}</b> images ont un visuel ` +
+    `(<b>${keys.length}</b> importées sur cet ordinateur, <b>${curated}</b> déjà dans le site).</p>` +
+    `<div class="pa-grid">` +
+    IMAGE_CORPUS.map((e) => {
+      const idb = keys.includes(e.code);
+      const site = !!e.titre;
+      const cls = idb ? "has-idb" : site ? "has-site" : "has-none";
+      const tip = idb ? "importée ici" : site ? "dans le site" : "sans visuel";
+      return `<span class="pa-chip ${cls}" title="${tip}">${e.code}</span>`;
+    }).join("") +
+    `</div>`;
+}
+
+$("#prof-images-zip").addEventListener("click", async () => {
+  const keys = (await IDB.keys()).filter((k) => typeof k === "string" && k.startsWith("I"));
+  if (!keys.length) { alert("Aucune image importée sur cet ordinateur pour l'instant."); return; }
+  const files = [];
+  for (const code of keys) {
+    const blob = await IDB.get(code);
+    if (!blob) continue;
+    const ext = extFromImageType(blob.type);
+    files.push({ name: `images/bank/${code}.${ext}`, data: new Uint8Array(await blob.arrayBuffer()) });
+  }
+  const zip = await MPZip.makeZip(files);
+  downloadBlob(zip, "images.zip");
+});
+
+$("#prof-images-clear").addEventListener("click", async () => {
+  if (!confirm("Retirer toutes les images importées de CET ordinateur ? (le site n'est pas modifié)")) return;
+  const keys = (await IDB.keys()).filter((k) => typeof k === "string" && k.startsWith("I"));
+  for (const k of keys) await IDB.del(k);
+  profImageFiles = [];
+  renderProfImagesList();
+  renderProfImagesStatus();
+  buildImageBank();
+});
 
 /* ============================================================
    IMPORT DES MUSIQUES PAR LE PROFESSEUR
@@ -560,6 +740,7 @@ $("#prof-audio-clear").addEventListener("click", async () => {
 buildStepper();
 buildLegend();
 buildCorpus();
+buildImageBank();
 refreshFiche();
 refreshCreation();
 renderGame();

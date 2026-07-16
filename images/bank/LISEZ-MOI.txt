@@ -1,0 +1,8 @@
+Déposez ici les images/vidéos de la banque, un fichier par entrée,
+nommé exactement d'après son code (voir images-corpus.js) :
+
+    I1.jpg   I2.jpg   I3.jpg   ...   I50.jpg
+
+Formats acceptés : jpg, png, mp4, webm.
+Tant qu'un fichier est absent, la carte affiche « image à ajouter »
+et le reste du site continue de fonctionner normalement.

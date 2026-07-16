@@ -93,6 +93,7 @@
         <div class="cl-tabs">
           <button type="button" class="cl-tab on" data-cl="file">📁 Ma vidéo / image</button>
           <button type="button" class="cl-tab" data-cl="youtube">▶️ Lien YouTube</button>
+          <button type="button" class="cl-tab" data-cl="bank">🖼️ Banque d'images</button>
         </div>
         <div class="cl-pane" data-pane="file">
           <input type="file" id="creation-file" accept="video/*,image/*" />
@@ -105,8 +106,30 @@
           </div>
           <p class="cl-hint">Utile si ta création est déjà en ligne (extrait de film, montage…).</p>
         </div>
+        <div class="cl-pane" data-pane="bank" hidden>
+          <p class="cl-hint">Pas envie de filmer&nbsp;? Choisis une image ou une vidéo dans cette banque —
+            juste celle qui t'attire, sans réfléchir à une émotion précise.</p>
+          <div id="image-bank-grid" class="image-bank-grid"></div>
+        </div>
         <div id="creation-preview" class="creation-preview"></div>
       </div>
+
+      <section id="prof-images" class="prof-audio" hidden>
+        <h3>🎛️ Mode prof — importer des images/vidéos</h3>
+        <p class="pa-intro">
+          Glisse tes fichiers (image ou vidéo) ci-dessous. Nomme-les de préférence par code
+          (ex. <b>I12 – paysage.jpg</b>) pour un classement automatique — sinon, corrige le code à la main.
+          Ils sont utilisables <b>aussitôt sur cet ordinateur</b>. Pour que <b>tous les élèves</b> les voient,
+          télécharge le paquet et pousse-le dans le dépôt (dossier <code>images/bank/</code>).
+        </p>
+        <input type="file" id="prof-images-files" accept="image/*,video/*" multiple />
+        <div id="prof-images-list" class="prof-audio-list"></div>
+        <div class="prof-audio-actions">
+          <button type="button" id="prof-images-zip" class="cta">⬇️ Télécharger images.zip (pour le site)</button>
+          <button type="button" id="prof-images-clear" class="ghost">Vider les images de cet ordinateur</button>
+        </div>
+        <div id="prof-images-status" class="prof-audio-status"></div>
+      </section>
 
       <label class="field">
         <span>Quelle émotion veux-tu faire passer&nbsp;? (garde-la en tête)</span>
@@ -229,6 +252,7 @@
   <audio id="player"></audio>
 
   <script src="corpus.js"></script>
+  <script src="images-corpus.js"></script>
   <script src="zip.js"></script>
   <script src="app.js"></script>
 </body>

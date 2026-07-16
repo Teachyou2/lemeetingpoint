@@ -34,3 +34,23 @@ partager sous la même licence).
 | Fichier | Œuvre | Licence | Source |
 |---|---|---|---|
 | `images/etape1-voyageur.jpg` | Caspar David Friedrich — *Le Voyageur contemplant une mer de nuages* (1818) | 🟢 Domaine public | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Caspar_David_Friedrich_-_Wanderer_above_the_Sea_of_Fog.jpeg) |
+
+## Crédits banque d'images (étape 2)
+Les 10 premières entrées de `images-corpus.js` (codes I1 à I10) viennent de Wikimedia Commons.
+
+| Code | Œuvre | Auteur | Licence | Source |
+|---|---|---|---|---|
+| I1 | La Grande Vague de Kanagawa | Hokusai | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Great_Wave_off_Kanagawa2.jpg) |
+| I2 | La Nuit étoilée | Van Gogh | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg) |
+| I3 | La Jeune Fille à la perle | Vermeer | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Meisje_met_de_parel.jpg) |
+| I4 | Un dimanche après-midi à l'île de la Grande Jatte | Seurat | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:A_Sunday_on_La_Grande_Jatte,_Georges_Seurat,_1884.jpg) |
+| I5 | La Liberté guidant le peuple | Delacroix | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Eug%C3%A8ne_Delacroix_-_La_libert%C3%A9_guidant_le_peuple.jpg) |
+| I6 | Le Radeau de la Méduse | Géricault | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Th%C3%A9odore_G%C3%A9ricault_-_Le_Radeau_de_la_M%C3%A9duse.jpg) |
+| I7 | Impression, soleil levant | Monet | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Claude_Monet,_Impression,_soleil_levant.jpg) |
+| I8 | Le Baiser | Klimt | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg) |
+| I9 | Composition VIII | Kandinsky | 🟢 CC0 (domaine public) | [Commons](https://commons.wikimedia.org/wiki/File:Kandinsky_-_Composition_8,_July_1923.jpg) |
+| I10 | Migrant Mother (photographie, 1936) | Dorothea Lange | 🟢 Domaine public (archives gouvernementales US) | [Commons](https://commons.wikimedia.org/wiki/File:Lange-MigrantMother02.jpg) |
+
+Les codes **I11 à I50** sont des emplacements libres : déposez vos propres images/vidéos
+dans `images/bank/` (voir `images/bank/LISEZ-MOI.txt`) ou utilisez le panneau d'import du mode
+prof à l'étape 2.
