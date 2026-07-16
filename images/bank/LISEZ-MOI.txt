@@ -3,6 +3,8 @@ nommé exactement d'après son code (voir images-corpus.js) :
 
     I1.jpg   I2.jpg   I3.jpg   ...   I50.jpg
 
+(I1 à I26 sont déjà fournies — les codes I27 à I50 sont libres.)
+
 Formats acceptés : jpg, png, mp4, webm.
 Tant qu'un fichier est absent, la carte affiche « image à ajouter »
 et le reste du site continue de fonctionner normalement.

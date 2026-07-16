@@ -50,7 +50,23 @@ Les 10 premières entrées de `images-corpus.js` (codes I1 à I10) viennent de W
 | I8 | Le Baiser | Klimt | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg) |
 | I9 | Composition VIII | Kandinsky | 🟢 CC0 (domaine public) | [Commons](https://commons.wikimedia.org/wiki/File:Kandinsky_-_Composition_8,_July_1923.jpg) |
 | I10 | Migrant Mother (photographie, 1936) | Dorothea Lange | 🟢 Domaine public (archives gouvernementales US) | [Commons](https://commons.wikimedia.org/wiki/File:Lange-MigrantMother02.jpg) |
+| I11 | Le Cri | Edvard Munch | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Edvard_Munch_-_The_Scream_-_Google_Art_Project.jpg) |
+| I12 | Nymphéas | Claude Monet | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Claude_Monet_-_Seerosen.jpg) |
+| I13 | Bal du moulin de la Galette | Auguste Renoir | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Auguste_Renoir_-_Dance_at_Le_Moulin_de_la_Galette_-_Google_Art_Project.jpg) |
+| I14 | Le Trois Mai 1808 | Francisco de Goya | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:El_Tres_de_Mayo,_by_Francisco_de_Goya,_from_Prado_thin_black_margin.jpg) |
+| I15 | Composition en rouge, bleu et jaune | Piet Mondrian | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Piet_Mondriaan,_1930_-_Mondrian_Composition_II_in_Red,_Blue,_and_Yellow.jpg) |
+| I16 | Lever de Terre (Earthrise, 1968) | NASA | 🟢 Domaine public (œuvre du gouvernement US) | [Commons](https://commons.wikimedia.org/wiki/File:NASA-Apollo8-Dec24-Earthrise.jpg) |
+| I17 | Vallée de Yosemite (v. 1865) | Carleton Watkins | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Carleton_Watkins,_Yosemite_Valley,_California,_ca._1865.jpg) |
+| I18 | Dust Bowl, Texas (1936) | Arthur Rothstein | 🟢 Domaine public (archives gouvernementales US) | [Commons](https://commons.wikimedia.org/wiki/File:Dust_bowl,_Texas_Panhandle,_TX_fsa.8b27276_edit.jpg) |
+| I19 | La Vallée de l'ombre de la mort (1855) | Roger Fenton | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Valley_of_the_shadow_of_death.jpg) |
+| I20 | Portrait de Charles Darwin (1868) | Julia Margaret Cameron | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Charles_Darwin_by_Julia_Margaret_Cameron,_c._1868.jpg) |
+| I21 | L'Homme de Vitruve | Léonard de Vinci | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Da_Vinci_Vitruve_Luc_Viatour.jpg) |
+| I22 | Mains en prière (1508) | Albrecht Dürer | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Albrecht_D%C3%BCrer_-_Praying_Hands,_1508_-_Google_Art_Project.jpg) |
+| I23 | Le Rhinocéros (1515) | Albrecht Dürer | 🟢 CC0 (domaine public) | [Commons](https://commons.wikimedia.org/wiki/File:Albrecht_D%C3%BCrer,_The_Rhinoceros,_1515,_NGA_47903.jpg) |
+| I24 | Croquis (Hokusai Manga) | Katsushika Hokusai | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Hokusai_sketches_-_hokusai_manga_vol6.jpg) |
+| I25 | Cheval au galop, étude de mouvement (1878, vidéo) | Eadweard Muybridge | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Horse_in_Motion_-_Sallie_Gardner_(animation).webm) |
+| I26 | Premier éternuement filmé (1894, vidéo) | Thomas Edison | 🟢 Domaine public | [Commons](https://commons.wikimedia.org/wiki/File:Edison_kinetoscopic_record_of_a_sneeze,_January_7,_1894.webm) |
 
-Les codes **I11 à I50** sont des emplacements libres : déposez vos propres images/vidéos
+Les codes **I27 à I50** sont des emplacements libres : déposez vos propres images/vidéos
 dans `images/bank/` (voir `images/bank/LISEZ-MOI.txt`) ou utilisez le panneau d'import du mode
 prof à l'étape 2.
