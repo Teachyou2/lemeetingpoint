@@ -117,8 +117,14 @@ h2 { font-size: 1.5rem; letter-spacing: -0.01em; margin: 0 0 10px; display: flex
 @media (max-width: 520px) { .g-choices { grid-template-columns: 1fr; } }
 .img-choice { display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--line); background: var(--bg); border-radius: 12px; padding: 14px; align-items: stretch; }
 .img-choice.chosen { border-color: var(--accent); box-shadow: var(--shadow); }
-.img-choice .img-pick { margin-top: 0; }
-.img-choice.chosen .img-pick { background: var(--accent-deep); }
+.img-choice .img-play, .img-choice .img-pick {
+  height: 44px; padding: 0 14px; border-radius: 10px; font-weight: 700; font-size: 0.95rem; margin-top: 0;
+}
+.img-choice .img-play { background: #2f6fed; color: #fff; border: none; }
+.img-choice .img-play:hover { background: #1f56c4; }
+.img-choice .img-pick { background: #fff; color: #21242b; border: 2px solid var(--line); }
+.img-choice .img-pick:hover { border-color: #2f6fed; color: #2f6fed; }
+.img-choice.chosen .img-pick { border-color: #2f6fed; color: #2f6fed; }
 
 .note { display: flex; flex-direction: column; gap: 4px; background: color-mix(in srgb, var(--gold) 14%, var(--surface)); border: 1px solid color-mix(in srgb, var(--gold) 40%, var(--line)); border-radius: 14px; padding: 18px 20px; margin-top: 20px; }
 .note b { color: var(--accent-deep); }
